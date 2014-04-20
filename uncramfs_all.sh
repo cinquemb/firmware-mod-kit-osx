@@ -43,11 +43,11 @@ then
 	done
 fi
 
-FSIMG=$(readlink -f $FSIMG)
-ROOTFS=$(readlink -f $ROOTFS)
+FSIMG=$(greadlink -f $FSIMG)
+ROOTFS=$(greadlink -f $ROOTFS)
 
 # Make sure we're operating out of the FMK directory
-cd $(dirname $(readlink -f $0))
+cd $(dirname $(greadlink -f $0))
 
 if [ "$ENDIANESS" == "-be" ]
 then
