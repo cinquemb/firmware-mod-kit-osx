@@ -21,22 +21,22 @@ LzmaAlone = ${Lzma}/CPP/7zip/Compress/LZMA_Alone
 SqTools = ${Squashfs}/squashfs-tools
 
 # enable it if you want to add -g option when compiling
-UseDebugFlags =
+UseDebugFlags = 1
 # disable it if you don't want to compile squashfs kernel module here
 BuildSquashfs = 1
 
 export
 
 all:
-	${MAKE} -C ${LzmaC} -f sqlzma.mk $@
-	${MAKE} -C ${LzmaAlone} -f sqlzma.mk $@
-	${MAKE} -C ${SqTools} $@
+	make -C ${LzmaC} -f sqlzma.mk $@
+	make -C ${LzmaAlone} -f sqlzma.mk $@
+	make -C ${SqTools} $@
 
 clean:
-	${MAKE} -C ${LzmaC} -f sqlzma.mk $@
-	${MAKE} -C ${LzmaAlone} -f sqlzma.mk $@
-	${MAKE} -C ${SqTools} $@
-	${RM} *~
+	make -C ${LzmaC} -f sqlzma.mk $@
+	make -C ${LzmaAlone} -f sqlzma.mk $@
+	make -C ${SqTools} $@
+	rm *~
 
 install:
 	#cp squashfs3.2-r2/squashfs-tools/mksquashfs /opt/buildroot-gdb/bin/mksquashfs_lzma-3.2

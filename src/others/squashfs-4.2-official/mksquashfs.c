@@ -721,13 +721,13 @@ void cache_block_put(struct file_buffer *entry)
 			+ (((char *)A) - data_cache)))
 
 
-inline void inc_progress_bar()
+static inline void inc_progress_bar()
 {
 	cur_uncompressed ++;
 }
 
 
-inline void update_progress_bar()
+static inline void update_progress_bar()
 {
 	pthread_mutex_lock(&progress_mutex);
 	pthread_cond_signal(&progress_wait);
@@ -735,7 +735,7 @@ inline void update_progress_bar()
 }
 
 
-inline void waitforthread(int i)
+static inline void waitforthread(int i)
 {
 	TRACE("Waiting for thread %d\n", i);
 	while(thread[i] != 0)
@@ -3340,7 +3340,7 @@ struct inode_info *lookup_inode(struct stat *buf)
 }
 
 
-inline void add_dir_entry(char *name, char *pathname, struct dir_info *sub_dir,
+static inline void add_dir_entry(char *name, char *pathname, struct dir_info *sub_dir,
 	struct inode_info *inode_info, struct dir_info *dir)
 {
 	if((dir->count % DIR_ENTRIES) == 0) {
@@ -4363,7 +4363,7 @@ int excluded(struct pathnames *paths, char *name, struct pathnames **new)
 				regexec(path->name[i].preg, name, (size_t) 0,
 					NULL, 0) == 0 :
 				fnmatch(path->name[i].name, name,
-					FNM_PATHNAME|FNM_PERIOD|FNM_EXTMATCH) ==
+					FNM_PATHNAME|FNM_PERIOD) ==
 					 0;
 
 			if(match && path->name[i].paths == NULL) {

@@ -31,8 +31,8 @@
 #include <string.h>
 #include <sys/types.h>
 
-#include <endian.h>
-#include <byteswap.h>
+#include </usr/include/machine/endian.h>
+//#include <byteswap.h>
 #include <sys/types.h>
 
 #include "untrx.h"

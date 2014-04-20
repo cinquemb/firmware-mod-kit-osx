@@ -1651,7 +1651,7 @@ int matches(struct pathnames *paths, char *name, struct pathnames **new)
 		for(i = 0; i < path->names; i++) {
 			int match = use_regex ?
 				regexec(path->name[i].preg, name, (size_t) 0, NULL, 0) == 0 :
-				fnmatch(path->name[i].name, name, FNM_PATHNAME|FNM_PERIOD|FNM_EXTMATCH) == 0;
+				fnmatch(path->name[i].name, name, FNM_PATHNAME|FNM_PERIOD) == 0;
 			if(match && path->name[i].paths == NULL)
 				/* match on a leaf component, any subdirectories will
 				 * implicitly match, therefore return an empty new search set */

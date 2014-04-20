@@ -47,11 +47,16 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
+#if defined(HAVE_SYS_QUOTA_H)
+#if defined(HAVE_SYS_SYSMACROS_H)
 #include <sys/sysmacros.h>
+#endif
+#include <sys/quota.h>
+#endif
 #include <utime.h>
 #include <sys/ioctl.h>
 #define _LINUX_STRING_H_
-#include <linux/fs.h>
+//#include <linux/fs.h>
 #include <linux/cramfs_fs.h>
 #include <zlib.h>
 
@@ -142,7 +147,7 @@ static void test_super(int *start, size_t *length) {
 		die(FSCK_ERROR, 1, "open failed: %s", filename);
 	}
 	if (S_ISBLK(st.st_mode)) {
-		if (ioctl(fd, BLKGETSIZE, length) < 0) {
+		if (ioctl(fd, TIOCGSIZE, length) < 0) {
 			die(FSCK_ERROR, 1, "ioctl failed: unable to determine device size: %s", filename);
 		}
 		*length = *length * 512;
@@ -218,7 +223,7 @@ static void test_crc(int start)
 
 	buf = mmap(NULL, super.size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
 	if (buf == MAP_FAILED) {
-		buf = mmap(NULL, super.size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+		buf = mmap(NULL, super.size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
 		if (buf != MAP_FAILED) {
 			lseek(fd, 0, SEEK_SET);
 			read(fd, buf, super.size);

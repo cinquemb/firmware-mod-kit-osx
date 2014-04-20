@@ -37,6 +37,13 @@
 
 #define IS_XATTR(a)		(a != SQUASHFS_INVALID_XATTR)
 
+#define llistxattr(path, list, size) \
+  (listxattr(path, list, size, XATTR_NOFOLLOW))
+#define lgetxattr(path, name, value, size) \
+  (getxattr(path, name, value, size, 0, XATTR_NOFOLLOW))
+#define lsetxattr(path, name, value, size, flags) \
+  (setxattr(path, name, value, size, 0, flags | XATTR_NOFOLLOW))
+
 struct xattr_list {
 	char			*name;
 	char			*full_name;
@@ -73,7 +80,7 @@ extern unsigned int xattr_bytes, total_xattr_bytes;
 extern void write_xattr(char *, unsigned int);
 extern int read_xattrs_from_disk(int, struct squashfs_super_block *);
 extern struct xattr_list *get_xattr(int, unsigned int *);
-#else
+#else  
 static inline int get_xattrs(int fd, struct squashfs_super_block *sBlk)
 {
 	if(sBlk->xattr_id_table_start != SQUASHFS_INVALID_BLK) {

@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <elf.h>
+#include "elf.h"
 #include "common.h"
 
 /* Given the physical and virtual section loading addresses, convert a virtual address to a physical file offset */

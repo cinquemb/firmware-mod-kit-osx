@@ -33,7 +33,7 @@
 #include <dirent.h>
 #include <string.h>
 #include <zlib.h>
-#include <endian.h>
+#include </usr/include/machine/endian.h>
 #include <stdlib.h>
 #include <signal.h>
 #include <setjmp.h>
@@ -1249,7 +1249,7 @@ struct dir_ent {
 };
 
 
-void inline add_dir_entry(char *name, char *pathname, void *data, struct directory *dir)
+static void inline add_dir_entry(char *name, char *pathname, void *data, struct directory *dir)
 {
 		if((dir->count % DIR_ENTRIES) == 0)
 			if((dir->list = realloc(dir->list, (dir->count + DIR_ENTRIES) * sizeof(struct dir_ent *))) == NULL)

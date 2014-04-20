@@ -36,7 +36,7 @@ int read_fragment_table_3()
 		sBlk.fragment_table_start);
 
 	if(sBlk.fragments == 0)
-		return;
+		return -1;
 
 	if((fragment_table = malloc(sBlk.fragments *
 			sizeof(squashfs_fragment_entry_3))) == NULL)

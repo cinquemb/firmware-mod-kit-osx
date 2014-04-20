@@ -16,6 +16,8 @@
 
 #define kStartMaxLen 3
 
+UInt32 g_CrcTable[256];
+
 void LzInWindow_Free(CMatchFinder *p, ISzAlloc *alloc)
 {
   if (!p->directInput)

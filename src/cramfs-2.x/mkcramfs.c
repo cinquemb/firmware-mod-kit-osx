@@ -223,7 +223,7 @@ static int cramsort (const void *a, const void *b)
 		       (*(const struct dirent **) b)->d_name);
 }
 
-static unsigned int parse_directory(struct entry *root_entry, const char *name, struct entry **prev, loff_t *fslen_ub)
+static unsigned int parse_directory(struct entry *root_entry, const char *name, struct entry **prev, off_t *fslen_ub)
 {
 	struct dirent **dirlist;
 	int totalsize = 0, dircount, dirindex;
@@ -687,7 +687,7 @@ int main(int argc, char **argv)
 	ssize_t offset, written;
 	int fd;
 	/* initial guess (upper-bound) of required filesystem size */
-	loff_t fslen_ub = sizeof(struct cramfs_super);
+	off_t fslen_ub = sizeof(struct cramfs_super);
 	char const *dirname, *outfile;
 	u32 crc;
 	int c;			/* for getopt */
@@ -787,7 +787,7 @@ int main(int argc, char **argv)
 	   RAM free.  If the reason is to be able to write to
 	   un-mmappable block devices, then we could try shared mmap
 	   and revert to anonymous mmap if the shared mmap fails. */
-	rom_image = mmap(NULL, fslen_ub?fslen_ub:1, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	rom_image = mmap(NULL, fslen_ub?fslen_ub:1, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
 
 	if (rom_image == MAP_FAILED) {
 		die(MKFS_ERROR, 1, "mmap failed");

@@ -31,10 +31,6 @@
  * include rg_os.h.
  */
 
-//#include <linux/types.h>
-#include <asm/types.h>
-#define u32 __u32
-#define u8  __u8
 #if defined(__KERNEL__) && !defined(__OS_VXWORKS__)
 #include <linux/kernel.h>
 #include <linux/slab.h>
@@ -49,7 +45,9 @@
 #endif
 
 #include "LzmaDecode.h"
-#include "decode.h"
+
+typedef uint32_t u32;
+typedef uint8_t u8;
 
 static u32 lzma_internal_size = 0;
 static void *lzma_internal_data = NULL;
@@ -102,7 +100,7 @@ int lzma_decode(void *dst, int dstlen, void *src, int srclen)
     if (prop0 >= 9 * 5 * 5)
     {
 	LZMA_ERR("Properties Error\n");
-	return -2;
+	return -1;
     }
     for (pb = 0; prop0 >= 9 * 5; pb++, prop0 -= 9 * 5);
     for (lp = 0; prop0 >= 9; lp++, prop0 -= 9);
@@ -118,7 +116,7 @@ int lzma_decode(void *dst, int dstlen, void *src, int srclen)
 	{
 	    lzma_internal_size = 0;
 	    LZMA_ERR("Error allocating internal data\n");
-	    return -2;
+	    return -1;
 	}
 	lzma_internal_size = calc_internal_size;
     }
@@ -129,7 +127,7 @@ int lzma_decode(void *dst, int dstlen, void *src, int srclen)
     if (res)
     {
 	LZMA_ERR("Decoder internal error (%d)\n", res);
-	return -2;
+	return -1;
     }
 
     return dstlen;

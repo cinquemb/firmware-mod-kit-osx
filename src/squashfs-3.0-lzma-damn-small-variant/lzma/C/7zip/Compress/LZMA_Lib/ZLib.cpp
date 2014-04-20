@@ -25,8 +25,11 @@
 /*
  * default values for encoder/decoder used by wrapper
  */
-
+#include <stdlib.h>
 #include <zlib.h>
+#include </usr/include/malloc/malloc.h>
+#include <stdio.h>
+#include <pthread.h>
 
 /* jc: undef to kill compress2_lzma */
 #define _LZMA_PARAMS 
@@ -257,11 +260,6 @@ extern "C" int compress2_lzma_test (Bytef *dest,   uLongf *destLen,
 	
 	return Z_OK;
 }
-
-#include <malloc.h>
-#include <stdio.h>
-#include <pthread.h>
-
 
 unsigned char pbmatrix[3]={0,1,2};
 unsigned char lcmatrix[4]={0,1,2,3};

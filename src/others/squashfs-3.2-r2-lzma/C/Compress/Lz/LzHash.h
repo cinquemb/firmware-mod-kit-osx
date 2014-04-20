@@ -3,6 +3,8 @@
 #ifndef __C_LZHASH_H
 #define __C_LZHASH_H
 
+extern UInt32 g_CrcTable[];
+
 #define kHash2Size (1 << 10)
 #define kHash3Size (1 << 16)
 #define kHash4Size (1 << 20)

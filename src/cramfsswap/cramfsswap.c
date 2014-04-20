@@ -11,8 +11,8 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include <sys/stat.h>
-#include <linux/cramfs_fs.h>
-#include <byteswap.h>
+#include "linux/cramfs_fs.h"
+//#include <byteswap.h>
 #include <zlib.h> /* for crc32 */
 #include <sys/mman.h>
 #include <fcntl.h>
@@ -22,6 +22,26 @@
 #define BUFFERSIZE	16384
 #define MAXFILES	4096
 #define BLKSIZE		4096	/* Should this be a command line option? */
+
+#ifndef _BYTESWAP_H
+#define _BYTESWAP_H
+
+//#warning "byteswap.h is an unportable GNU extension!  Don't use!"
+
+static inline unsigned short bswap_16(unsigned short x) {
+  return (x>>8) | (x<<8);
+}
+
+static inline unsigned int bswap_32(unsigned int x) {
+  return (bswap_16(x&0xffff)<<16) | (bswap_16(x>>16));
+}
+
+static inline unsigned long long bswap_64(unsigned long long x) {
+  return (((unsigned long long)bswap_32(x&0xffffffffull))<<32) |
+(bswap_32(x>>32));
+}
+
+#endif
 
 
 int main(int argc, char *argv[])

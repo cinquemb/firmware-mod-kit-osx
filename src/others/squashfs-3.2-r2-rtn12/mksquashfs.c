@@ -466,7 +466,7 @@ void *queue_get(struct queue *queue)
 #define MKINODE(A)	((squashfs_inode)(((squashfs_inode) inode_bytes << 16) + (((char *)A) - data_cache)))
 
 
-inline void waitforthread(int i)
+static inline void waitforthread(int i)
 {
 	TRACE("Waiting for thread %d\n", i);
 	while(thread[i] != 0)
@@ -2234,7 +2234,7 @@ struct inode_info *lookup_inode(struct stat *buf)
 }
 
 
-inline void add_dir_entry(char *name, char *pathname, struct dir_info *sub_dir, struct inode_info *inode_info, void *data, struct dir_info *dir)
+static inline void add_dir_entry(char *name, char *pathname, struct dir_info *sub_dir, struct inode_info *inode_info, void *data, struct dir_info *dir)
 {
 	if((dir->count % DIR_ENTRIES) == 0)
 		if((dir->list = realloc(dir->list, (dir->count + DIR_ENTRIES) * sizeof(struct dir_ent *))) == NULL)

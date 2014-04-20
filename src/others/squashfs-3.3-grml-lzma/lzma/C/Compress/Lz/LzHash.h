@@ -11,6 +11,8 @@
 #define kFix4HashSize (kHash2Size + kHash3Size)
 #define kFix5HashSize (kHash2Size + kHash3Size + kHash4Size)
 
+extern UInt32 g_CrcTable[];
+
 #define HASH2_CALC hashValue = cur[0] | ((UInt32)cur[1] << 8);
 
 #define HASH3_CALC { \

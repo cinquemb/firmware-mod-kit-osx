@@ -37,6 +37,13 @@
 
 #define IS_XATTR(a)		(a != SQUASHFS_INVALID_XATTR)
 
+#define llistxattr(path, list, size) \
+  (listxattr(path, list, size, XATTR_NOFOLLOW))
+#define lgetxattr(path, name, value, size) \
+  (getxattr(path, name, value, size, 0, XATTR_NOFOLLOW))
+#define lsetxattr(path, name, value, size, flags) \
+  (setxattr(path, name, value, size, 0, flags | XATTR_NOFOLLOW))
+
 struct xattr_list {
 	char			*name;
 	char			*full_name;

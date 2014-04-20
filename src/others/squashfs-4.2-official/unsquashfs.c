@@ -29,7 +29,7 @@
 #include "compressor.h"
 #include "xattr.h"
 
-#include <sys/sysinfo.h>
+#include <sys/sysctl.h>
 #include <sys/types.h>
 
 struct cache *fragment_cache, *data_cache;
@@ -1204,7 +1204,7 @@ int matches(struct pathnames *paths, char *name, struct pathnames **new)
 			int match = use_regex ?
 				regexec(path->name[i].preg, name, (size_t) 0,
 				NULL, 0) == 0 : fnmatch(path->name[i].name,
-				name, FNM_PATHNAME|FNM_PERIOD|FNM_EXTMATCH) ==
+				name, FNM_PATHNAME|FNM_PERIOD) ==
 				0;
 			if(match && path->name[i].paths == NULL)
 				/*
