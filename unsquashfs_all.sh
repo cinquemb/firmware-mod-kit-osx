@@ -3,7 +3,7 @@
 #
 # Craig Heffner
 # 27 August 2011
-BINDIR=`dirname $0`
+BINDIR=$(cd `dirname $0` && pwd)
 . "$BINDIR/common.inc"
 IMG="$1"
 DIR="$2"
@@ -79,11 +79,11 @@ then
 	done
 fi
 
-IMG=$(readlink -f "$IMG")
-DIR=$(readlink -f "$DIR")
+IMG=$(greadlink -f "$IMG")
+DIR=$(greadlink -f "$DIR")
 
 # Make sure we're operating out of the FMK directory
-cd $(dirname $(readlink -f "$0"))
+cd $(dirname $(greadlink -f "$0"))
 
 MAJOR=$(./src/binwalk-1.0/src/bin/binwalk-script -m ./src/binwalk-*/src/binwalk/magic/binwalk -l 1024 "$IMG" | head -4 | tail -1 | sed -e 's/.*version //' | cut -d'.' -f1)
 
