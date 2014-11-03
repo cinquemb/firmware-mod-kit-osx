@@ -141,7 +141,7 @@ FOOTER_OFFSET=0
 # Grab the last 10 lines of a hexdump of the firmware image, excluding the
 # last line in the hexdump. Reverse the line order and replace any lines
 # that start with '*' with the word 'FILLER'.
-for LINE in $(hexdump -C ${IMG} | tail -11 | head -10 | sed -n '1!G;h;$p' | sed -e 's/^*/FILLER/')
+for LINE in $(hexdump -C "${IMG}" | tail -11 | head -10 | sed -n '1!G;h;$p' | sed -e 's/^*/FILLER/')
  do
 	if [ "${LINE}" = "FILLER" ]; then
 		break
