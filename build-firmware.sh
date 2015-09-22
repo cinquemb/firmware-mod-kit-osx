@@ -24,10 +24,10 @@ else
         SUDO=""
 fi
 
-DIR=$(readlink -f $DIR)
+DIR=$(greadlink -f $DIR)
 
 # Make sure we're operating out of the FMK directory
-cd $(dirname $(readlink -f $0))
+cd $(dirname $(greadlink -f $0))
 
 # Order matters here!
 eval $(cat shared-ng.inc)
