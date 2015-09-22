@@ -46,7 +46,7 @@ fi
 Build_Tools
 
 # Get the size, in bytes, of the target firmware image
-FW_SIZE=$(ls -l "${IMG}" | cut -d' ' -f5)
+FW_SIZE=$(stat -f '%z' "${IMG}")
 
 # Create output directories
 mkdir -p "${DIR}/logs"
