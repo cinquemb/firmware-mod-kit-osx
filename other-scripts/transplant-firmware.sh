@@ -13,17 +13,11 @@ if [ "$1" == "-h" ] || [ ! -d "$SRC/image_parts" ] || [ ! -d "$DEST/image_parts"
 	exit 1
 fi
 
-if [ "$UID" != "0" ]; then
-        SUDO="sudo"
-else
-        SUDO=""
-fi
-
 mkdir "$DEST/rootfs.bak"
 cp -rf "$DEST/rootfs/*" "$DEST/rootfs.bak/"
 mkdir "$DEST/image_parts.bak"
 cp -rf "$DEST/image_parts/*" "$DEST/image_parts.bak/"
-$SUDO cp -rf "$SRC/rootfs" "$DEST/"
-$SUDO cp -rf "$SRC/image_parts" "$DEST/"
+cp -rf "$SRC/rootfs" "$DEST/"
+cp -rf "$SRC/image_parts" "$DEST/"
 
 echo "All done! $SRC contents (but not format) transplanted to $DEST"

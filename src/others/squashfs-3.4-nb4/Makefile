@@ -89,7 +89,7 @@ endif
 load:
 	for i in ${LzmaC}/kmod/unlzma.ko ${LzmaC}/kmod/sqlzma.ko \
 		${SqFs}/squashfs.ko; \
-	do sudo insmod $$i; done
+	do insmod $$i; done
 
 unload:
-	-sudo rmmod squashfs sqlzma unlzma
+	-rmmod squashfs sqlzma unlzma

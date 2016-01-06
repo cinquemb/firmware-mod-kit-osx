@@ -17,13 +17,6 @@ else
 	NEXT_PARAM="$2"
 fi
 
-# Need to extract file systems as ROOT
-if [ "$UID" != "0" ]; then
-        SUDO="sudo"
-else
-        SUDO=""
-fi
-
 DIR=$(greadlink -f $DIR)
 
 # Make sure we're operating out of the FMK directory
@@ -79,10 +72,10 @@ case $FS_TYPE in
 			echo "Squashfs block size is $HR_BLOCKSIZE Kb"
 		fi
 
-		$SUDO $MKFS "$ROOTFS" "$FSOUT" $ENDIANESS $BS $COMP -all-root
+		$MKFS "$ROOTFS" "$FSOUT" $ENDIANESS $BS $COMP -all-root
 		;;
 	"cramfs")
-		$SUDO $MKFS "$ROOTFS" "$FSOUT"
+		$MKFS "$ROOTFS" "$FSOUT"
 		if [ "$ENDIANESS" == "-be" ]; then
 			mv "$FSOUT" "$FSOUT.le"
 			./src/cramfsswap/cramfsswap "$FSOUT.le" "$FSOUT"
@@ -90,7 +83,7 @@ case $FS_TYPE in
 		fi
 		;;
 	"yaffs")
-		$SUDO $MKFS "$ROOTFS" "$FSOUT"
+		$MKFS "$ROOTFS" "$FSOUT"
 		echo "WARNING: YAFFS2 completely untested !! Hit any key to confirm ..."
 		pause
 		;;
@@ -106,7 +99,7 @@ fi
 
 # Append the new file system to the first part of the original firmware file
 cp $HEADER_IMAGE $FWOUT
-$SUDO cat $FSOUT >> $FWOUT
+cat $FSOUT >> $FWOUT
 
 # Calculate and create any filler bytes required between the end of the file system and the footer / EOF.
 CUR_SIZE=$(ls -l $FWOUT | awk '{print $5}')

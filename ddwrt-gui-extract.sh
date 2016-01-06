@@ -13,11 +13,6 @@ then
 	OUT="www"
 fi
 
-if [ $UID -ne 0 ]
-then
-	SUDO="sudo"
-fi
-
 eval $(cat shared-ng.inc)
 HTTPD="$DIR/usr/sbin/httpd"
 WWW="$DIR/etc/www"

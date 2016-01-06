@@ -17,11 +17,6 @@ then
 	exit 1
 fi
 
-if [ $UID -ne 0 ]
-then
-	SUDO="sudo"
-fi
-
 if [ "$ENDIANESS" == "" ]
 then
 	if [ "$(file $FSIMG | grep 'big endian')" != "" ]

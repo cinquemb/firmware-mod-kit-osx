@@ -9,12 +9,6 @@ if [ "${DIR}" = "" ]; then
 	DIR="fmk"
 fi
 
-# Need to extract file systems as ROOT
-if [ "$(id -ru)" != "0" ]; then
-	SUDO="sudo"
-else
-	SUDO=""
-fi
 
 IMG=$(greadlink -f $IMG)
 DIR=$(greadlink -f $DIR)
@@ -80,9 +74,10 @@ for LINE in IFS='
 		HEADER_TYPE=${DESCRIPTION}
 		HEADER_SIZE=$(echo ${LINE} | sed -e 's/.*header size: //' | cut -d' ' -f1)
 		HEADER_IMAGE_SIZE=$(echo ${LINE} | sed -e 's/.*image size: //' | cut -d' ' -f1)
+    fi
 
 	# Check to see if this line is a file system entry
-	elif [ "$(echo ${LINE} | grep -i filesystem)" != "" ]
+	if [ "$(echo ${LINE} | grep -i filesystem)" != "" ]
 	 then
 		FS_OFFSET=${OFFSET}
 		FS_TYPE=${DESCRIPTION}
@@ -177,24 +172,24 @@ echo "ENDIANESS='${ENDIANESS}'" >> ${CONFLOG}
 case ${FS_TYPE} in
 	"squashfs")
 		echo "Extracting squashfs files..."
-		${SUDO} ./unsquashfs_all.sh "${FSIMG}" "${ROOTFS}" 2>/dev/null | grep MKFS >> "${CONFLOG}"
+		./unsquashfs_all.sh "${FSIMG}" "${ROOTFS}" 2>/dev/null | grep MKFS >> "${CONFLOG}"
 		;;
 	"cramfs")
 		echo "Extracting CramFS file system..."
-		${SUDO} ./uncramfs_all.sh "${FSIMG}" "${ROOTFS}" ${ENDIANESS} 2>/dev/null | grep MKFS >> "${CONFLOG}"
+		./uncramfs_all.sh "${FSIMG}" "${ROOTFS}" ${ENDIANESS} 2>/dev/null | grep MKFS >> "${CONFLOG}"
 		;;
 	"yaffs")
 		echo "Extracting YAFFS file system..."
-		${SUDO} ./src/yaffs2utils/unyaffs2 "${FSIMG}" "${ROOTFS}" 2>/dev/null 
+		./src/yaffs2utils/unyaffs2 "${FSIMG}" "${ROOTFS}" 2>/dev/null 
 		echo "MKFS='./src/yaffs2utils/mkyaffs2'" >> "${CONFLOG}"
 		;;
 	"jffs2")
 		echo "Extracting JFFS2 file system..."
-		${SUDO} ./src/jffs2/unjffs2 "${FSIMG}" 1>&2 2>/dev/null
+		./src/jffs2/unjffs2 "${FSIMG}" 1>&2 2>/dev/null
 		# unjffs2 extracts to hard-coded directory of 'rootfs'
 		if [ -e "rootfs" ]
 		then
-			${SUDO} mv rootfs "${ROOTFS}"
+			mv rootfs "${ROOTFS}"
 		fi
 		echo "MKFS='./src/jffs2/mkjffs2'" >> "${CONFLOG}"
 		;;

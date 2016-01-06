@@ -10,8 +10,8 @@ if [ "$1" == "-h" ] || [ ! -e "$SRC" ] || [ ! -e "$DEST" ]; then
 	echo "Example: $0 tl-wdr4300-vendor.bin gargoyle-wdr4300-sysupgrade.bin"
 	exit 1
 fi
-sudo rm -rf vendor
-sudo rm -rf fmk
+rm -rf vendor
+rm -rf fmk
 ./extract-firmware.sh "$SRC"
 mv fmk vendor
 ./extract-firmware.sh "$DEST"
