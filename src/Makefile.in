@@ -49,7 +49,6 @@ clean:
 	rm -f asustrx
 	rm -f addpattern
 	rm -f splitter3
-	rm -f binwalk
 	make -C ./jffs2 clean
 	make -C ./squashfs-2.1-r2/ clean
 	make -C ./squashfs-3.0 clean

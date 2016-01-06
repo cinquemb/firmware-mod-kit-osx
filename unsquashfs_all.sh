@@ -85,8 +85,7 @@ DIR=$(greadlink -f "$DIR")
 # Make sure we're operating out of the FMK directory
 cd $(dirname $(greadlink -f "$0"))
 
-MAJOR=$(./src/binwalk-1.0/src/bin/binwalk-script -m ./src/binwalk-*/src/binwalk/magic/binwalk -l 1024 "$IMG" | head -4 | tail -1 | sed -e 's/.*version //' | cut -d'.' -f1)
-
+MAJOR=$(binwalk -l 1024 "$IMG" | head -4 | tail -1 | sed -e 's/.*version //' | cut -d'.' -f1)
 echo -e "Attempting to extract SquashFS $MAJOR.X file system...\n"
 
 for SUBDIR in $SUBDIRS
