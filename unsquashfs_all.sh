@@ -86,7 +86,7 @@ DIR=$(greadlink -f "$DIR")
 cd $(dirname $(greadlink -f "$0"))
 
 MAJOR=$(binwalk -l 1024 "$IMG" | head -4 | tail -1 | sed -e 's/.*version //' | cut -d'.' -f1)
-echo -e "Attempting to extract SquashFS $MAJOR.X file system...\n"
+echo -ne "Attempting to extract SquashFS $MAJOR.X file system...\n"
 
 for SUBDIR in $SUBDIRS
 do
