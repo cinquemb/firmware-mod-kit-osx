@@ -193,6 +193,14 @@ case ${FS_TYPE} in
 		fi
 		echo "MKFS='./src/jffs2/mkjffs2'" >> "${CONFLOG}"
 		;;
+	"wind")
+		echo "Extracting Wind River management file system..."
+		./src/owfs/unowfs "${FSIMG}" "${ROOTFS}" 1>&2 2>/dev/null
+		if [ -e ${ROOTFS} ]
+		then
+			echo "MKFS='unowfs done'" >> "${CONFLOG}"
+		fi
+		;;
 	*)
 		echo "Unsupported file system '${FS_TYPE}'! Quitting..."
 		rm -rf "${DIR}"
@@ -206,7 +214,7 @@ if [ ${?} -eq 0 ]; then
 	echo "Firmware parts can be found in '${DIR}/*'"
 else
 	echo "Firmware extraction failed!"
-	rm -rf "${DIR}"
+	#rm -rf "${DIR}"
 	exit 1
 fi
 
