@@ -28,7 +28,7 @@
 #include <stdarg.h>
 #include <errno.h>
 #include <sys/stat.h>
-#include <endian.h>     /* for __BYTE_ORDER */
+#include <machine/endian.h>     /* for __BYTE_ORDER */
 
 #if defined(__CYGWIN__)
 #  include <byteswap.h>

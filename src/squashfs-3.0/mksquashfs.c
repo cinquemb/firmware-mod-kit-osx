@@ -57,7 +57,7 @@
 /* jc debugging */
 #warning "mksquashfs: (jc) building on non-linux system."
 #else
-#include <endian.h>
+#include <machine/endian.h>
 #endif
 
 #include <squashfs_fs.h>

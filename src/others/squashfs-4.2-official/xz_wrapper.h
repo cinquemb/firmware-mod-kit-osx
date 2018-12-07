@@ -29,7 +29,7 @@
 #define __BIG_ENDIAN BIG_ENDIAN
 #define __LITTLE_ENDIAN LITTLE_ENDIAN
 #else
-#include <endian.h>
+#include <machine/endian.h>
 #endif
 
 #if __BYTE_ORDER == __BIG_ENDIAN

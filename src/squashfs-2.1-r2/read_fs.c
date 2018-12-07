@@ -34,7 +34,7 @@ extern int add_file(int, int, unsigned int *, int, unsigned int, int, int);
 #include <zlib.h>
 #include <sys/mman.h>
 
-#include </usr/include/machine/endian.h>
+#include <machine/endian.h>
 #include "read_fs.h"
 #include <squashfs_fs.h>
 

@@ -54,7 +54,7 @@
 #define __LITTLE_ENDIAN LITTLE_ENDIAN
 #include <sys/sysctl.h>
 #else
-#include <endian.h>
+#include <machine/endian.h>
 #include <sys/sysinfo.h>
 #endif
 

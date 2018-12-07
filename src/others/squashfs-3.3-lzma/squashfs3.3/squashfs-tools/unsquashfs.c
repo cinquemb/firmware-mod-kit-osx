@@ -47,7 +47,7 @@
 #define __BIG_ENDIAN BIG_ENDIAN
 #define __LITTLE_ENDIAN LITTLE_ENDIAN
 #else
-#include <endian.h>
+#include <machine/endian.h>
 #endif
 
 #include <squashfs_fs.h>

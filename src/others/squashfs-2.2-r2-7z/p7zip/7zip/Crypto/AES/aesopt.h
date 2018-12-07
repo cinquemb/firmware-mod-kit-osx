@@ -168,9 +168,9 @@
 
 
 #if defined(__BEOS__)
-#include <endian.h>
+#include <machine/endian.h>
 #elif defined(__linux__) || defined(__GLIBC__)
-#include <endian.h>
+#include <machine/endian.h>
 #include <byteswap.h>
 #elif defined(__APPLE_CC__)
 #include <machine/endian.h>

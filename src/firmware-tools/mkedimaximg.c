@@ -15,7 +15,7 @@
 #include <getopt.h>
 #include <errno.h>
 #include <sys/stat.h>
-#include <endian.h>	/* for __BYTE_ORDER */
+#include <machine/endian.h>	/* for __BYTE_ORDER */
 
 #if (__BYTE_ORDER == __LITTLE_ENDIAN)
 #  define HOST_TO_LE16(x)	(x)

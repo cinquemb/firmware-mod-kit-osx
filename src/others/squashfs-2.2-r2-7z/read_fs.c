@@ -40,7 +40,7 @@ extern int add_file(int, int, unsigned int *, int, unsigned int, int, int);
 #define __BIG_ENDIAN BIG_ENDIAN
 #define __LITTLE_ENDIAN LITTLE_ENDIAN
 #else
-#include <endian.h>
+#include <machine/endian.h>
 #endif
 
 #include <squashfs_fs.h>

@@ -16,7 +16,7 @@ int cramfs_uncompress_exit(int comp_method);
 
 //#include <rg_config.h>
 #include <byteswap.h>
-#include <endian.h>
+#include <machine/endian.h>
 
 typedef unsigned char u8;
 typedef unsigned short u16;

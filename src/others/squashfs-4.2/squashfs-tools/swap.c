@@ -26,7 +26,7 @@
 #define __LITTLE_ENDIAN LITTLE_ENDIAN
 #endif
 #else
-#include <endian.h>
+#include <machine/endian.h>
 #endif
 
 #if __BYTE_ORDER == __BIG_ENDIAN
