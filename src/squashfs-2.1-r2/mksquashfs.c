@@ -33,7 +33,7 @@
 #include <dirent.h>
 #include <string.h>
 #include <zlib.h>
-#include </usr/include/machine/endian.h>
+#include <machine/endian.h>
 #include <stdlib.h>
 #include <signal.h>
 #include <setjmp.h>

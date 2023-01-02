@@ -27,7 +27,7 @@
  */
 #include <stdlib.h>
 #include <zlib.h>
-#include </usr/include/malloc/malloc.h>
+#include <malloc/malloc.h>
 #include <stdio.h>
 #include <pthread.h>
 

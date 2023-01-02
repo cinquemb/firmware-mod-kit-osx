@@ -33,6 +33,8 @@
 #include <dirent.h>
 #include <string.h>
 #include <zlib.h>
+#include <libgen.h>
+#include <ctype.h>
 #ifdef __MACOSX__
   #define __BYTE_ORDER BYTE_ORDER
   #define __BIG_ENDIAN BIG_ENDIAN
@@ -1287,6 +1289,7 @@ void *linux_opendir(char *pathname, struct directory *dir)
 	return (void *) linuxdir;
 }
 
+int devtable_readdir(void *l, char *filename, char *dir_name, struct stat* devtable_inode_info);
 
 int linux_readdir(void *l, char *filename, char *dir_name, struct stat* devtable_inode_info)
 {
@@ -1445,7 +1448,11 @@ int devtable_readdir(void *l, char *filename, char *dir_name, struct stat* devta
 
 char b_buffer[8192];
 char *name;
-char *basename_r();
+// basename() needs <libgen.h>, which itself declares basename_r()
+// libgen's declaration:  char *basename_r(const char *, char *)
+// our declaration:       char *basename_r()
+// so I'm using basename_r2() instead
+char *basename_r2();
 
 char *getbase(char *pathname)
 {
@@ -1457,14 +1464,14 @@ char *getbase(char *pathname)
 	} else
 		strcpy(b_buffer, pathname);
 	name = b_buffer;
-	if(((result = basename_r()) == NULL) || (strcmp(result, "..") == 0))
+	if(((result = basename_r2()) == NULL) || (strcmp(result, "..") == 0))
 		return NULL;
 	else
 		return result;
 }
 
 
-char *basename_r()
+char *basename_r2()
 {
 	char *s;
 	char *p;
@@ -1481,7 +1488,7 @@ char *basename_r()
 		while(*name == '/') name++;
 		if(strncmp(s, ".", n) == 0)
 			continue;
-		if((*name == '\0') || (strncmp(s, "..", n) == 0) || ((p = basename_r()) == NULL)) {
+		if((*name == '\0') || (strncmp(s, "..", n) == 0) || ((p = basename_r2()) == NULL)) {
 			s[n] = '\0';
 			return s;
 		}

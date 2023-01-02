@@ -67,7 +67,7 @@
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
-#include </usr/include/machine/endian.h>
+#include <machine/endian.h>
 //#include <byteswap.h>
 #include <sys/types.h>
 
