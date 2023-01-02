@@ -11,17 +11,25 @@ Firmware Modification Kit forked from https://code.google.com/p/firmware-mod-kit
 ### Homebrew
 ```bash
 LZMA=$(brew info xz | grep homebrew/ | cut -d ' ' -f 1)  \
-./configure LDFLAGS="-L${LZMA}/lib" CPPFLAGS="-I${LZMA}/include"
+LDFLAGS="-L${LZMA}/lib"  \
+CPPFLAGS="-I${LZMA}/include"  \
+./configure
 
-# LZMA=$(brew info xz | grep homebrew/ | cut -d ' ' -f 1)  \
-make all EXTRA_CFLAGS="-I${LZMA}/include"
+LZMA=$(brew info xz | grep homebrew/ | cut -d ' ' -f 1)  \
+LDFLAGS="-L${LZMA}/lib"  \
+CPPFLAGS="-I${LZMA}/include"  \
+make all
 ```
 
 ### Macports
 As mentioned by kiwiroy, macports installs at `/opt/local/`
 
 ```bash
-./configure LDFLAGS="-L/opt/local/lib" CPPFLAGS="-I/opt/local/include"
+LDFLAGS="-L/opt/local/lib"  \
+CPPFLAGS="-I/opt/local/include"  \
+./configure
 
-make all EXTRA_CFLAGS="-I/opt/local/include"
+LDFLAGS="-L/opt/local/lib"  \
+CPPFLAGS="-I/opt/local/include"  \
+make all
 ```
